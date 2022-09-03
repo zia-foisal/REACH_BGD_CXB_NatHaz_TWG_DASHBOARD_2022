@@ -8,34 +8,68 @@ output:
 logo : www/REACH.png
 runtype : shiny
 ---
-<script>
-$('.navbar-logo').wrap('www/REACH.png');
-</script>
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+```
+
+
+```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+library(tidyverse)
+library(shiny)
+library(sf)
+library(leaflet)
+library(mapview)
+library(RColorBrewer)
+```
+
+```{r,include=FALSE,echo=FALSE,  message=FALSE, warning=FALSE,results='hide'}
+camp_flood <- st_read(dsn = "E:/NatHaz/zonal stat layer final/Zonal_stat_sblock_level_refactored.shp")
+camp <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRC_Outline_Camp_AL1.shp")
+block <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRRC_Outline_Block_AL2.shp")
 ```
 
 Hydro-Meteorological Data - REACH{data-navmenu="Hydro-Meteorological Data"}
 ============================================================================== 
 Row
 -----------------------------------------------------------------------   
-### Product Descriptions
-```{r}
+### Product Summary
 
-```
+
+
 
 Pluvial Flooding Model – ARUP with IOM & REACH {data-navmenu="Flood Model"}
 =======================================================================   
-Column {data-width=650}
------------------------------------------------------------------------
-### Model Descriptions
-```{r}
-
-```
 Column {data-width=350}
 -----------------------------------------------------------------------
-### Hydronamic Flood Model
+### Product Summary
+
+[Arup Pluvial Flood Modelling](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf)
+
+[Flood Vulnerability Analysis](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf)
+
+- **Product Descriptions :** 
+
+-This product is the result of flood modelling carried out for the camps located in Teknaf Upazila. The model generated simulates three different probability defined rainfall events: 1, 5, and 10-year Average Reoccurrence  Interval (ARI) storms. The maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation) is modelled. These scenarios were chosen to ensure comparability with the flood modelling work performed earlier by Deltares/WFP in the Kutupalong Megacamp area (see previous info sheet). Product released February 2020. The model output provides information about expected flooded area, water depth and speed of water flow for the various scenarios. It is primarily designed as a macro-level site planning tool. The product can be used to quickly identify areas which may be at higher risk. All insights gained from the product must be investigated in the field. The scenario mapped by the NatHaz TF (link) is based on a 10 year ARI rainfall event. However, the modelled depth and velocity data is available for 1, 5, and 10 year ARI events (detailed data available upon request). 
+
+- **Methodology in short:** 
+
+-The model simulates three different storm events based on probability (1, 5, and 10-year average re-occurrence interval) based on the maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation). After hydrologic correction of input terrain data a direct rainfall (TUFLOW) model applied to extract all major/minor flow paths and simulate pluvial flooding. 
+
+-  **Main Input Data :**
+  1. 0.5 m resolution Digital Elevation Model (DEM) from UAV drone survey (IOM-NPM; January 2019)
+  2. Building footprint (REACH-UNOSAT, Jan 2019)
+  3. Precipitation data (BMD/Deltares) 
+
+-**Limitations :** 
+
+-The model is based on assumptions that need to be verified with on the ground data collection (i.e. water level in rivers). The results of the model are not interpreted and entails a degree of uncertainties and artefacts.Site planning decisions should not solely rely on the results, but need a sound on-site evaluation.
+
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+### Pluvial Flooding Model
 ```{r}
 
 ```
@@ -44,108 +78,310 @@ Flood Vulnerability Analysis – Deltares with WFP {data-navmenu="Flood Model"}
 =======================================================================   
 Column {data-width=350}
 -----------------------------------------------------------------------
-### Model Descriptions
+### Product Summary
 ```{r}
 
 ```
 Column {data-width=650}
 -----------------------------------------------------------------------
-### Hydronamic Flood Model
+### Flood Vulnerability Analysis
 ```{r}
 
 ```
 
 
-Flood Water Extent - REACH{data-orientation=rows data-navmenu="Flood Model"}
+Flood Water Extent - REACH{ data-navmenu="Flood Model"}
 ============================================================================== 
-Row {data-width=650}
------------------------------------------------------------------------   
-### Chart A
-```{r}
-
-```
 Row {data-width=350}
------------------------------------------------------------------------
-### Chart B
-```{r}
+-----------------------------------------------------------------------   
+### Product Summary
 
+**Description:**
+This map shows the modelled flood extent following a 10-year average return interval (ARI) rainfall event. Links to maps showing the modelled flood depths and detailing the underlying methodology can be found in the Hydrodynamic Modelling data sources below. Only water depths greater than 0.05 metres are considered. Camp names and Block letters are labelled on the maps.
+
+-**N.B:**
+-**Camp 20 Extension:** Calculated at the camp level as there are no published block and sub-block boundaries.
+-**KRC and NRC:** Calculated at the block level as there are no published sub-block boundaries. 
+
+**Uses and Limitations:**
+-The aim of this map is to help planners and decision makers identify priority areas for interventions at camp sub-block level. It is not designed as a standard tool for detailed site planning decisions. Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The map does not provide any information about water flow.  Results are derived from remote sensing and computational modelling; they are not ground proofed and inherently limited by the quality of the input data/or model assumptions. The flood zones do not necessarily imply exposure and, similarly, the areas outside the flood extents are not necessarily free from any danger. 
+
+**Data Sources:**
+
+-Structure Footprint: REACH/UNOSAT, 2021
+-Camp Boundary: ISCG, 2020
+-Block and Subblock Boundary: ISCG, 2021 
+-Coordinate System: WGS 1984 UTM Zone 46N 
+-Hydrodynamic Modelling:
+  -[Arup Pluvial Flooding Model, 2020](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf)
+  - [Flood Vulnerability Analysis, 2019](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf)
+
+**Contact Information:**
+*reach.mapping@impact-initiatives.org*
+
+**Disclaimer:**
+Data, designations, and boundaries contained on this map are not warranted to be error-free and do not imply acceptance by REACH.
+
+
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Flood Water Extent
+
+```{r}
+mapview(camp, color = "red",  lwd = 3, alpha.regions =0.001, alpha = 0.9, label=camp$Camp_Name, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,color = "blue",  lwd = 2, alpha.regions =0.01, alpha = 0.5, label=block$Block_Let, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) +
+  mapview(camp_flood, zcol = "Flood_Area",
+        map.types = c("CartoDB.Positron"),
+        at = c (0,5000,15000,45000,90000,235000),
+        col.regions = c("#eff3ff","#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"),
+        #col.regions = RColorBrewer::brewer.pal(9, "Blues"),
+        lwd = 0.3,
+        alpha = 0.9,
+        legend = TRUE,
+        label = "SubBlock_N",
+        layer.name = "Flooded Water Extent (Square meters)")
 ```
 
 Flood Water Volume - REACH {data-navmenu="Flood Model"}
 ============================================================================== 
-Row {data-width=650}
------------------------------------------------------------------------   
-### Chart A
-```{r}
-
-```
 Row {data-width=350}
------------------------------------------------------------------------
-### Chart B
-```{r}
+-----------------------------------------------------------------------   
+### Product Summary
 
+**Description:**
+-This map shows the modelled flood volume following a 10-year average return interval (ARI) rainfall event. Links to maps showing the modelled flood depths and detailing the underlying methodology can be found in the Hydrodynamic Modelling data sources below. Only water depths greater than 0.05 meters are considered. Camp names and Block letters are labelled on the maps.
+
+-*N.B:* 
+-**Camp 20 Extension:** Calculated at the camp level as there are no published block and sub-block boundaries.
+-**KRC and NRC:** Calculated at the block level as there are no published sub-block boundaries. 
+
+**Uses and Limitations:**
+-The aim of this map is to help planners and decision makers identify priority areas for interventions at camp sub-block level. It is not designed as a standard tool for detailed site planning decisions. Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The map does not provide any information about water flow.  Results are derived from remote sensing and computational modelling; they are not ground proofed and inherently limited by the quality of the input data/or model assumptions. The flood zones do not necessarily imply exposure and, similarly, the areas outside the flood extents are not necessarily free from any danger. 
+
+**Data Sources:**
+
+-Structure Footprint: REACH/UNOSAT, 2021
+-Camp Boundary: ISCG, 2020
+-Block and Subblock Boundary: ISCG, 2021 
+-Coordinate System: WGS 1984 UTM Zone 46N 
+-Hydrodynamic Modelling:
+  -[Arup Pluvial Flooding Model, 2020](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf)
+  - [Flood Vulnerability Analysis, 2019](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf)
+
+**Contact Information:**
+*reach.mapping@impact-initiatives.org*
+
+**Disclaimer:**
+Data, designations, and boundaries contained on this map are not warranted to be error-free and do not imply acceptance by REACH.
+
+
+
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Flood Water Volume
+
+```{r,message=FALSE, warning=FALSE}
+
+mapview(camp,color = "red",  lwd = 3, alpha.regions =0.001, alpha = 0.9, label=camp$Camp_Name, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,color = "blue",  lwd = 1.5, alpha.regions =0.001, alpha = 0.5, label=block$Block_Let, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) +
+  mapview(camp_flood, zcol = "Flood_Volu",
+        map.types = c("CartoDB.Positron"),
+        at = c (0,5000,15000,45000,90000,227000),
+        col.regions = c("#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"),
+        lwd = 1,
+        alpha = 0.9,
+        legend = TRUE,
+        label = "SubBlock_N",
+        layer.name = "Flood Water Volume (Cubic meters)")
 ```
 
 
-Structures Exposed to Flood - REACH{data-navmenu="Flood Model"}
+Number of Structures Exposed to Flood - REACH{data-navmenu="Flood Model"}
 ============================================================================== 
-Row {data-width=650}
------------------------------------------------------------------------   
-### Chart A
-```{r}
-
-```
 Row {data-width=350}
------------------------------------------------------------------------
-### Chart B
-```{r}
+-----------------------------------------------------------------------   
+### Product Summary
 
+**Description:**
+-This map shows the estimated number of flooded structures following a 10-year average return interval (ARI) rainfall event. Links to maps showing the modelled flood depths and detailing the underlying methodology can be found in the Hydrodynamic Modelling data sources below. Structures were taken from the REACH/UNOSAT 2021 Structure Footprint where flood depth is greater than 0.05 meters. Note that the structure footprint includes facilities, households, WASH blocks etc. but is thought to be a useful proxy for estimating community exposure. Camp names and Block letters are labelled on the maps.
+
+-*N.B:* 
+-**Camp 20 Extension:** Calculated at the camp level as there are no published block and sub-block boundaries.
+-**KRC and NRC:** Calculated at the block level as there are no published sub-block boundaries. 
+
+**Uses and Limitations:**
+-The aim of this map is to help planners and decision makers identify priority areas for interventions at camp sub-block level. It is not designed as a standard tool for detailed site planning decisions. Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The map does not provide any information about water flow.  Results are derived from remote sensing and computational modelling; they are not ground proofed and inherently limited by the quality of the input data/or model assumptions. The flood zones do not necessarily imply exposure and, similarly, the areas outside the flood extents are not necessarily free from any danger. 
+
+**Data Sources:**
+
+-Structure Footprint: REACH/UNOSAT, 2021
+-Camp Boundary: ISCG, 2020
+-Block and Subblock Boundary: ISCG, 2021 
+-Coordinate System: WGS 1984 UTM Zone 46N 
+-Hydrodynamic Modelling:
+  -[Arup Pluvial Flooding Model, 2020](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf)
+  - [Flood Vulnerability Analysis, 2019](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf)
+
+**Contact Information:**
+*reach.mapping@impact-initiatives.org*
+
+**Disclaimer:**
+Data, designations, and boundaries contained on this map are not warranted to be error-free and do not imply acceptance by REACH.
+
+
+
+
+
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Structures Exposed to Flood
+
+
+```{r}
+clrs <- sf.colors
+mapview(camp,
+        color = "red",
+        lwd = 3,
+        alpha.regions =0.001,
+        alpha = 0.9,
+        label=camp$Camp_Name, 
+        labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,
+          color = "black",
+          lwd = 2,
+          alpha.regions =0.001,
+          alpha = 0.5,
+          label=block$Block_Let,
+          labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) + 
+  mapview(camp_flood, 
+          zcol = "Shelter_Co",
+          at = c(0,35,70,140,240,500),
+          col.regions = c("#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"), 
+          lwd = 0.4,
+          alpha = 0.5,
+          label = "SubBlock_N",
+          legend = TRUE,
+          layer.name = "Structure Exposed to Flood")
 ```
+
+
+
 
 Area Exposed to Flood - REACH {data-navmenu="Flood Model"}
 ============================================================================== 
-Row {data-width=650}
------------------------------------------------------------------------   
-### Chart A 
-```{r}
-
-```
 Row {data-width=350}
------------------------------------------------------------------------
-### Chart B
-```{r}
+-----------------------------------------------------------------------   
+### Product Summary
 
+**Description:**
+-This map shows the estimated area of flooded structures following a 10-year average return interval (ARI) rainfall event. Links to maps showing the modelled flood depths and detailing the underlying methodology can be found in the Hydrodynamic Modelling data sources below. Structures were taken from the REACH/UNOSAT 2021 Structure Footprint and are considered to be flooded when exposed to a water depth of 0.05 metres or more. Note that the structures footprint includes facilities, households, WASH blocks etc. but is thought to be a useful proxy for estimating community exposure. Camp names and Block letters are labelled on the maps.
+
+-*N.B:* 
+-**Camp 20 Extension:** Calculated at the camp level as there are no published block and sub-block boundaries.
+-**KRC and NRC:** Calculated at the block level as there are no published sub-block boundaries. 
+
+**Uses and Limitations:**
+-The aim of this map is to help planners and decision makers identify priority areas for interventions at camp sub-block level. It is not designed as a standard tool for detailed site planning decisions. Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The map does not provide any information about water flow.  Results are derived from remote sensing and computational modelling; they are not ground proofed and inherently limited by the quality of the input data/or model assumptions. The flood zones do not necessarily imply exposure and, similarly, the areas outside the flood extents are not necessarily free from any danger. 
+
+**Data Sources:**
+
+-Structure Footprint: REACH/UNOSAT, 2021
+-Camp Boundary: ISCG, 2020
+-Block and Subblock Boundary: ISCG, 2021 
+-Coordinate System: WGS 1984 UTM Zone 46N 
+-Hydrodynamic Modelling:
+  -[Arup Pluvial Flooding Model, 2020](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf)
+  - [Flood Vulnerability Analysis, 2019](https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf)
+
+**Contact Information:**
+*reach.mapping@impact-initiatives.org*
+
+**Disclaimer:**
+-Data, designations, and boundaries contained on this map are not warranted to be error-free and do not imply acceptance by REACH.
+
+
+
+
+
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Structure Area Exposed to Flood
+
+```{r}
+clrs <- sf.colors
+mapview(camp,
+        color = "red",
+        lwd = 3,
+        alpha.regions =0.001,
+        alpha = 0.9,
+        label=camp$Camp_Name, 
+        labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,
+          color = "black",
+          lwd = 1.5,
+          alpha.regions =0.001,
+          alpha = 0.5,
+          label=block$Block_Let,
+          labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) + 
+  mapview(camp_flood, 
+          zcol = "Shelter_Ar",
+          at = c (0,2000,4000,8000,16000,25000),
+          col.regions = c("#f1eef6", "#d4b9da", "#c994c7","#df65b0", "#dd1c77", "#980043"),
+          lwd = 0.4,
+          alpha = 0.5,
+          label = "SubBlock_N",
+          legend = TRUE,
+          layer.name = "Structure Area Exposed to Flood")
 ```
 
 
 
 Landslide Susceptibility and Warning Model - COMPASS {data-navmenu="Landslide Model"}
 ============================================================================== 
-Row {data-width=650}
------------------------------------------------------------------------   
-### Chart A
-```{r}
-
-```
 Row {data-width=350}
+-----------------------------------------------------------------------   
+### Product Summary
+
+**Product Description:**
+The model is developed by NASA through the NASA/IRI Columbia University led COMPAS project (Connecting Earth Observations to Decision Makers for Preparedness Actions). It consists of two modules; the first one integrates various input data to generate a landslide susceptibility map; the second model integrates a near real-time rainfall data to produce warning events for landslide occurrence. The first part utilizes machine learning technology and both are highly flexible in terms of parametrization and input sources. The models are designed to evolve with the availability of new data and integrate lessons learnt from previous events. The resolution of the model is 0.5m in the Kutupalong mega camp and 10m for the wider Cox’s Bazar district. Currently only the susceptibility maps are available. The maps categorizes the landscape into three categories, Low, Moderate and High, based on the likelihood of occurrence 
+of landslides (susceptibility). Practically, Low areas have a probability of isolated landslides, Moderate and High areas have probability of infrastructure and population are at risk due to landslides.The maps for Teknaf and Kutapalong are available for download from www.humanitarianresponse.info. This model is also under consideration for upgradation using the latest data.
+
+**Susceptibility module:** data of both continuous and categorical type are used as input and evaluated as part of a random forest classifier, where the classifier determines likely presence or absence of landslides. This is calibrated using the mapped landslide inventory. Dynamic module methodology uses daily rainfall over last 7 days; if rainfall exceeds historical thresholds (2000 – 2015) then a warning is issued. Will be hosted on GIS webpages (in progress)
+
+**Main Input Data**
+  -DEM Vricon 10m resolution (Cox’s Bazar district); DEM IOM-NPM Jan 2019, 0.5m resolution (Kutupalong mega camp)
+  -Soil thickness (ORNL DAAC, 1km res); land cover: MODIS/Terra and Aqua (500m res)
+  -Settlement extent (HBASE, Landsat 2010); Hot OSM buildings Cox’s Bazar
+  -Global Forest Change 2000 – 2017
+  -FAO Land Use Classification (in Camps)
+  -Near-Real precipitation (NASA IMERG)
+  
+**Limitations**
+  -The landslide susceptibility map highlights the potential rupture zones, but does not reflect the propagation of the landslide. The input data (e.g DEM) have their own limitations, which will affect the results adversely. Calibration of the model uses a catalog of mapped landslides, many of which are not validated by local observations. The map is not designed for a detailed site planning. Such activities need to be supported with on-site technical investigations. 
+
+Row {data-width=650}
 -----------------------------------------------------------------------
-### Chart D
+### Landslide Susceptibility and Warning Model
 ```{r}
 
 ```
 
 
-Wind Assessment - REACH with UNDP {data-navmenu="Wind Assessment"}
+Wind Hazard Assessment - REACH with UNDP {data-navmenu="Wind Hazard Assessment"}
 ============================================================================== 
 Row {data-width=350}
 -----------------------------------------------------------------------   
-### Chart C 
+### Product Summary 
 ```{r}
 
 ```
 Row {data-width=650}
 -----------------------------------------------------------------------
-### Chart B
+### Wind Hazard Assessment
 ```{r}
 
 ```
@@ -153,10 +389,41 @@ Storm Surge Analysis - REACH with IOM and UNHCR {data-navmenu="Storm Surge Analy
 ============================================================================== 
 Row {data-width=350}
 -----------------------------------------------------------------------   
-### Product Descriptions
-```{r}
+### Product Summary
+**Descriptions:** 
+The product is the result of a wind assessment for disaster risk management completed by Sanders and Partners commissioned by UNDP. Wind velocities magnitude and direction were simulated for three historical wind events meant to represent three hazardous wind regimes known to occur in the region:
+  1. Category 1, Saffir-Sampson Scale, cyclone (1994), 
+  2. monsoon wind conditions (2011), and 
+  3. pre-monsoon wind conditions, also known as the Kalbaishakhi - Northwestern (1995). 
 
-```
+Historical meteorological records were used to determine regional wind speeds and directions and input into the model. The study area considered is the region where in which the current Kutupalong-Balukhali Expansion site is located. For pre-monsoon and monsoon scenarios results were obtained on a daily basis for the duration of event, while for the cyclone scenario results were obtained on an hourly basis. The maximum wind speed resulting for the entire duration of each scenario was extracted and mapped by the Natural Hazard Task Force. The resulting map can be found at the following link and underlying data and GIS files  can be requested from the ISCG.
+
+**What it is Meant for?:** 
+The aim of this map is to help planners and decision makers to identify priority areas for interventions at camp level. It is primarily designed as a macro- level site planning tool.The product can be used to quickly identify areas which may be at  higher risk. All insights gained from the product must be investigated in the field.
+
+**Methodology in Short:** 
+The assessment was designed to investigate the following three hazardous wind regimes known to occur in the region which could harm living conditions in the camps, a.) Cyclone (Cat 1), b.) Monsoon winds, and c.) pre-monsoon winds. The historical events which have been simulated can be seen in the table below. First historical weather records were obtained for time periods represented in the table below. Historical weather conditions were then reproduced using the WRF model which is run at multiple nested resolutions down to 1 km. The WRF results are then fed into the  CALMET boundary layer model to downscale results to 10 m resolution over the area of interest. Wind speed and direction results were obtained at hourly intervals for the cyclone conditions and daily time intervals for the pre-monsoon and monsoon. The Natural Hazard Task Force mappeed the highest wind speed obtained for each scenario through the duration of the event.
+
+- **Main Input Data :**
+  -Mapped data
+    - Max wind velocity magnitude (Sanders & Partners, 2019)
+    - Structure Footprint (UNOSAT-REACH, 2019)
+    - Roads (©OpenStreetMap Contributors)
+    - Hill shade (derived from UAV Orthographic DEM, NPM, January 2019)
+  
+  - Main Model Inputs
+    -Meteorological data (ERA-Interim6)
+    - topographical data (1 m from NPM & 30 m open source)
+    - Soil surface characteristics
+    - Vegetation/NDVI Maps (FAO)
+  
+**Limitations:**
+- It is NOT designed as a stand-alone tool for detailed site planning decisions.
+- Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The results are not ground proofed and inherently limited by the quality of the input data and/or model assumptions.
+- The modeling did not account for turbulent effects which can cause local gusts, heavily meandering wind features and wind wakes. Additionally rapid changes in wind velocities were shown to occur in the camps. This can result in strong wind shear which has high potential for damage to both infrastructure and individuals.
+- The effects of wind shear are not adequately displayed on this map. Therefore, these mapped results are not suitable for the delineation of safe zones.
+  
+  
 Row {data-width=650}
 -----------------------------------------------------------------------
 ### Storm Surge Analysis
@@ -168,13 +435,13 @@ Fire Risk Assessment - REACH {data-navmenu="Fire Risk Assessment"}
 ============================================================================== 
 Row {data-width=350}
 -----------------------------------------------------------------------   
-### Product Descriptions
+### Product Summary
 ```{r}
 
 ```
 Row {data-width=650}
 -----------------------------------------------------------------------
-### Storm Surge Analysis
+### Fire Risk Assessment
 ```{r}
 
 ```

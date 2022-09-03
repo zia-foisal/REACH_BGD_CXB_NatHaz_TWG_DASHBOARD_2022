@@ -29,6 +29,7 @@ camp <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRC_Outline_Camp_AL1.sh
 block <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRRC_Outline_Block_AL2.shp")
 ```
 
+
 Flood {data-navmenu="Flood"}
 ======
 
@@ -56,9 +57,9 @@ mapview(camp,color = "red",  lwd = 3, alpha.regions =0.001, alpha = 0.9, label=c
 https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf
 https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf).
 
-- This product is the result of flood modelling carried out for the camps located in Teknaf Upazila. The model generated simulates three different probability defined rainfall events: 1, 5, and 10-year Average Reoccurrence  Interval (ARI) storms. The maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation) is modelled. These scenarios were chosen to ensure comparability with the flood modelling work performed earlier by Deltares/WFP in the Kutupalong Megacamp area (see previous infosheet). Product released February 2020. 
+- **Product Descriptions :** This product is the result of flood modelling carried out for the camps located in Teknaf Upazila. The model generated simulates three different probability defined rainfall events: 1, 5, and 10-year Average Reoccurrence  Interval (ARI) storms. The maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation) is modelled. These scenarios were chosen to ensure comparability with the flood modelling work performed earlier by Deltares/WFP in the Kutupalong Megacamp area (see previous infosheet). Product released February 2020. 
 
-- The model output provides information about expected flooded area, water depth and speed of water flow forthe various scenarios. It is primarily designed as a macro-level site planning tool. The product can be used to quickly identify areas which may be at higher risk. All insights gained from the product must be investigated in the field.
+- The model output provides information about expected flooded area, water depth and speed of water flow for the various scenarios. It is primarily designed as a macro-level site planning tool. The product can be used to quickly identify areas which may be at higher risk. All insights gained from the product must be investigated in the field.
 
 - The scenario mapped by the NatHaz TF (link) is based on a 10 year ARI rainfall event. However, the modelled depth and velocity data is available for 1, 5, and 10 year ARI events (detailed data available upon request). 
 
