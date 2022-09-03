@@ -28,7 +28,8 @@ camp_flood <- st_read(dsn = "E:/NatHaz/zonal stat layer final/Zonal_stat_sblock_
 camp <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRC_Outline_Camp_AL1.shp")
 block <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRRC_Outline_Block_AL2.shp")
 ```
-Flood {.tabset}
+
+Flood {data-navmenu="Flood"}
 ======
 
 ### Flood Water Volume
