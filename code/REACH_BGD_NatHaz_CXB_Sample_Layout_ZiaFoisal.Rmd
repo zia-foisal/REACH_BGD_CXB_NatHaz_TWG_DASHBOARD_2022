@@ -1,0 +1,185 @@
+---
+title: "Natural Hazards Risk Analysis Technical Working Group"
+author : Md. Zia Uddin Foisal
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+logo : www/REACH.png
+runtype : shiny
+---
+<script>
+$('.navbar-logo').wrap('www/REACH.png');
+</script>
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Hydro-Meteorological Data - REACH{data-navmenu="Hydro-Meteorological Data"}
+============================================================================== 
+Row
+-----------------------------------------------------------------------   
+### Product Descriptions
+```{r}
+
+```
+
+Pluvial Flooding Model – ARUP with IOM & REACH {data-navmenu="Flood Model"}
+=======================================================================   
+Column {data-width=650}
+-----------------------------------------------------------------------
+### Model Descriptions
+```{r}
+
+```
+Column {data-width=350}
+-----------------------------------------------------------------------
+### Hydronamic Flood Model
+```{r}
+
+```
+
+Flood Vulnerability Analysis – Deltares with WFP {data-navmenu="Flood Model"}
+=======================================================================   
+Column {data-width=350}
+-----------------------------------------------------------------------
+### Model Descriptions
+```{r}
+
+```
+Column {data-width=650}
+-----------------------------------------------------------------------
+### Hydronamic Flood Model
+```{r}
+
+```
+
+
+Flood Water Extent - REACH{data-orientation=rows data-navmenu="Flood Model"}
+============================================================================== 
+Row {data-width=650}
+-----------------------------------------------------------------------   
+### Chart A
+```{r}
+
+```
+Row {data-width=350}
+-----------------------------------------------------------------------
+### Chart B
+```{r}
+
+```
+
+Flood Water Volume - REACH {data-navmenu="Flood Model"}
+============================================================================== 
+Row {data-width=650}
+-----------------------------------------------------------------------   
+### Chart A
+```{r}
+
+```
+Row {data-width=350}
+-----------------------------------------------------------------------
+### Chart B
+```{r}
+
+```
+
+
+Structures Exposed to Flood - REACH{data-navmenu="Flood Model"}
+============================================================================== 
+Row {data-width=650}
+-----------------------------------------------------------------------   
+### Chart A
+```{r}
+
+```
+Row {data-width=350}
+-----------------------------------------------------------------------
+### Chart B
+```{r}
+
+```
+
+Area Exposed to Flood - REACH {data-navmenu="Flood Model"}
+============================================================================== 
+Row {data-width=650}
+-----------------------------------------------------------------------   
+### Chart A 
+```{r}
+
+```
+Row {data-width=350}
+-----------------------------------------------------------------------
+### Chart B
+```{r}
+
+```
+
+
+
+Landslide Susceptibility and Warning Model - COMPASS {data-navmenu="Landslide Model"}
+============================================================================== 
+Row {data-width=650}
+-----------------------------------------------------------------------   
+### Chart A
+```{r}
+
+```
+Row {data-width=350}
+-----------------------------------------------------------------------
+### Chart D
+```{r}
+
+```
+
+
+Wind Assessment - REACH with UNDP {data-navmenu="Wind Assessment"}
+============================================================================== 
+Row {data-width=350}
+-----------------------------------------------------------------------   
+### Chart C 
+```{r}
+
+```
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Chart B
+```{r}
+
+```
+Storm Surge Analysis - REACH with IOM and UNHCR {data-navmenu="Storm Surge Analysis"}
+============================================================================== 
+Row {data-width=350}
+-----------------------------------------------------------------------   
+### Product Descriptions
+```{r}
+
+```
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Storm Surge Analysis
+```{r}
+
+```
+
+Fire Risk Assessment - REACH {data-navmenu="Fire Risk Assessment"}
+============================================================================== 
+Row {data-width=350}
+-----------------------------------------------------------------------   
+### Product Descriptions
+```{r}
+
+```
+Row {data-width=650}
+-----------------------------------------------------------------------
+### Storm Surge Analysis
+```{r}
+
+```
+
+
+
+
+

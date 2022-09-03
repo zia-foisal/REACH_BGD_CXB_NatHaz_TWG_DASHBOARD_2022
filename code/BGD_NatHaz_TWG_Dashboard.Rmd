@@ -1,0 +1,197 @@
+---
+title: "NatHaz TWG Dashboard"
+author : Md. Zia Uddin Foisal
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    theme : journal
+    social: menu
+  logo: E:/Official REACH-Logo.png
+---
+
+```{r setup, include=FALSE,  results='hide', message=FALSE, warning=FALSE}
+library(flexdashboard)
+# Install thematic and un-comment for themed static plots (i.e., ggplot2)
+# thematic::thematic_rmd()
+```
+
+```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(mapview)
+library(RColorBrewer)
+```
+
+```{r,include=FALSE,echo=FALSE,  message=FALSE, warning=FALSE,results='hide'}
+camp_flood <- st_read(dsn = "E:/NatHaz/zonal stat layer final/Zonal_stat_sblock_level_refactored.shp")
+camp <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRC_Outline_Camp_AL1.shp")
+block <- st_read(dsn = "E:\\Camp Boundaries 2022\\T220130_RRRC_Outline_Block_AL2.shp")
+```
+Flood {.tabset}
+======
+
+### Flood Water Volume
+
+```{r,message=FALSE, warning=FALSE}
+
+mapview(camp,color = "red",  lwd = 3, alpha.regions =0.001, alpha = 0.9, label=camp$Camp_Name, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,color = "black",  lwd = 1.5, alpha.regions =0.001, alpha = 0.5, label=block$Block_Let, 
+   labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) +
+  mapview(camp_flood, zcol = "Flood_Volu",
+        map.types = c("CartoDB.Positron"),
+        at = c (0,5000,15000,45000,90000,227000),
+        col.regions = c("#eff3ff", "#bdd7e7", "#6baed6","#3182bd","#08519c"),
+        lwd = 1,
+        alpha = 0.9,
+        legend = TRUE,
+        label = "SubBlock_N",
+        layer.name = "Flood Water Volume (Cubic meters)")
+```
+
+***
+
+https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_modeling_teknafcamps_v1_25feb2020.pdf
+https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_hydrodynamic_flood_model_kutupalong_v2.1_nov2019.pdf).
+
+- This product is the result of flood modelling carried out for the camps located in Teknaf Upazila. The model generated simulates three different probability defined rainfall events: 1, 5, and 10-year Average Reoccurrence  Interval (ARI) storms. The maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation) is modelled. These scenarios were chosen to ensure comparability with the flood modelling work performed earlier by Deltares/WFP in the Kutupalong Megacamp area (see previous infosheet). Product released February 2020. 
+
+- The model output provides information about expected flooded area, water depth and speed of water flow forthe various scenarios. It is primarily designed as a macro-level site planning tool. The product can be used to quickly identify areas which may be at higher risk. All insights gained from the product must be investigated in the field.
+
+- The scenario mapped by the NatHaz TF (link) is based on a 10 year ARI rainfall event. However, the modelled depth and velocity data is available for 1, 5, and 10 year ARI events (detailed data available upon request). 
+
+- Methodology in short: The model simulates three different storm events based on probability (1, 5, and 10-year average reoccurrence interval) based on the maximum of two different rainfall duration/intensity scenarios for each storm (3 & 24 hr max precipitation). After hydrologic correction of input terrain data a direct rainfall (TUFLOW) model applied to extract all major/minor flow paths and simulate pluvial flooding. 
+
+-  Main Input Data : 0.5 m resolution Digital Elevation Model (DEM) from UAV drone survey (IOM-NPM; January 2019), Building footprint (REACH-UNOSAT, Jan 2019), Precipitation data (BMD/Deltares) 
+
+- The model is based on assumptions that need to be verified with on the ground data collection (i.e. water level in rivers). The results of the model are not interpreted and entails a degree of uncertainties and artefacts.Site planning decisions should not solely rely on the results, but need a sound on-site evaluation. 
+
+
+### NASA Landslide Model
+
+```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+clrs <- sf.colors
+mapview(camp,
+        color = "red",
+        lwd = 3,
+        alpha.regions =0.001,
+        alpha = 0.9,
+        label=camp$Camp_Name, 
+        labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,
+          color = "black",
+          lwd = 1.5,
+          alpha.regions =0.001,
+          alpha = 0.5,
+          label=block$Block_Let,
+          labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) + 
+  mapview(camp_flood, 
+          zcol = "Shelter_Co", 
+          col.regions = RColorBrewer::brewer.pal(9, "Oranges"), 
+          label = "SubBlock_N",
+          legend = TRUE,
+          layer.name = "Structure Exposed to Flood") 
+```
+
+***
+
+This sections reserves for the landslide model
+
+
+### Arup Storm Surge Modelling
+
+```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+clrs <- sf.colors
+mapview(camp,
+        color = "red",
+        lwd = 3,
+        alpha.regions =0.001,
+        alpha = 0.9,
+        label=camp$Camp_Name, 
+        labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,
+          color = "black",
+          lwd = 1.5,
+          alpha.regions =0.001,
+          alpha = 0.5,
+          label=block$Block_Let,
+          labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) + 
+  mapview(camp_flood, 
+          zcol = "Shelter_Co", 
+          col.regions = RColorBrewer::brewer.pal(9, "Oranges"), 
+          label = "SubBlock_N",
+          legend = TRUE,
+          layer.name = "Structure Exposed to Flood") 
+```
+
+***
+
+https://www.humanitarianresponse.info/sites/www.humanitarianresponse.info/files/documents/files/reach_bgd_map_nathaztf_flood_hazard_combined_10_year_ari_stormsurge_and_rain_event_may2020.pdf
+
+-
+-
+-
+-
+
+
+### Wind Hazard Model
+
+
+```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+clrs <- sf.colors
+mapview(camp,
+        color = "red",
+        lwd = 3,
+        alpha.regions =0.001,
+        alpha = 0.9,
+        label=camp$Camp_Name, 
+        labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE))+
+  mapview(block,
+          color = "black",
+          lwd = 1.5,
+          alpha.regions =0.001,
+          alpha = 0.5,
+          label=block$Block_Let,
+          labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE)) + 
+  mapview(camp_flood, 
+          zcol = "Shelter_Co", 
+          col.regions = RColorBrewer::brewer.pal(9, "Oranges"), 
+          label = "SubBlock_N",
+          legend = TRUE,
+          layer.name = "Structure Exposed to Flood") 
+```
+
+***
+
+
+- **Descriptions:** The product is the result of a wind assessment for disaster risk management completed by Sanders and Partners commissioned by UNDP. Wind velocities magnitude and direction were simulated for three historical wind events meant to represent three hazardous wind regimes known to occur in the region: a.) Category 1, Saffir-Sampson Scale, cyclone (1994), b.) monsoon wind conditions (2011), and c.) pre-monsoon wind conditions, also known as the Kalbaishakhi - Northwestern (1995). Historical meteorological records were used to determine regional wind speeds and directions and input into the model. The study area considered is the region where in which the current Kutupalong-Balukhali Expansion site is located. For pre-monsoon and monsoon scenarios results were obtained on a daily basis for the duration of event, while for the cyclone scenario results were obtained on an hourly basis. The maximum wind speed resulting for the entire duration of each scenario was extracted and mapped by the Natural Hazard Task Force. The resulting map can be found at the following link and underlying data and GIS files  can be requested from the ISCG.
+
+- **What it is Meant for?:** The aim of this map is to help planners and decision makers to identify priority areas for interventions at camp level. It is primarily designed as a macro- level site planning tool.The product can be used to quickly identify areas which may be at  higher risk. All insights gained from the product must be investigated in the field.
+
+-**Methodology in Short:** The assessment was designed to investigate the following three hazardous wind regimes known to occur in the region which could harm living conditions in the camps, a.) Cyclone (Cat 1), b.) Monsoon winds, and c.) pre-monsoon winds. The historical events which have been simulated can be seen in the table below. First historical weather records were obtained for time periods represented in the table below. Historical weather conditions were then reproduced using the WRF model which is run at multiple nested resolutions down to 1 km. The WRF results are then fed into the  CALMET boundary layer model to downscale results to 10 m resolution over the area of interest. Wind speed and direction results were obtained at hourly intervals for the cyclone conditions and daily time intervals for the pre-monsoon and monsoon. The Natural Hazard Task Force mappeed the highest wind speed obtained for each scenario through the duration of the event.
+
+- **Main Input Data :**
+Mapped data
+  • Max wind velocity magnitude (Sanders & Partners, 2019)
+  • Structure Footprint (UNOSAT-REACH, 2019)
+  • Roads (©OpenStreetMap Contributors)
+  • Hillshade (derived from UAV Orthographic DEM, NPM, January 
+  2019)
+  
+Main Model Inputs
+  • Meteorological data (ERA-Interim6)
+  • topographical data (1 m from NPM & 30 m open source) 
+  • Soil surface characteristics
+  • Vegetation/NDVI Maps (FAO)
+  
+- **Limitations:**
+
+  • It is NOT designed as a stand-alone tool for detailed site planning decisions.
+  
+  • Map results need to be ground verified and decisions combined with specific on-site evaluation and appropriate technical expertise. The results are not ground proofed and inherently limited by the quality of the input data and/or model assumptions.
+  
+  • The modeling did not account for turbulent effects which can cause local gusts, heavily meandering wind features and wind wakes. Additionally rapid changes in wind velocities were shown to occur in the camps. This can result in strong wind shear which has high potential for damage to both infrastructure and individuals.
+  
+  • The effects of wind shear are not adequately displayed on this map. Therefore, these mapped results are not suitable for the delineation of safe zones.
+
