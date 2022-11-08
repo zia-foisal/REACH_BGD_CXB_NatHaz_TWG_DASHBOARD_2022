@@ -3,4 +3,4 @@ This dashboard summarizes the current work of the Natural Hazard Risk Analysis T
 
 The NatHaz TWG summary report till June 2022 can be accessed by the following links [Natural Hazards Technical Working Group , Cox’s Bazar | June, 2022](https://www.impact-repository.org/document/reach/d5a0cddf/NatHaz_TWG_Summary_Report__v14.pdf)
 
-![REACH](www//REACH.png)
+![REACH](https://github.com/zia-foisal/REACH_BGD_CXB_NatHaz_TWG_DASHBOARD_2022/blob/main/www/REACH.PNG)
